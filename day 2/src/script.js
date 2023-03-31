@@ -5,7 +5,6 @@ function importData() {
               let files =   input.files[0];
               const reader = new FileReader()
               reader.readAsText(files, 'utf-8')
-              //let groups = fs.readFileSync(input.files, "utf-8")
               reader.onload = function() {
               let puzzle_input = reader.result.split('\n');
               let sum = 0;
