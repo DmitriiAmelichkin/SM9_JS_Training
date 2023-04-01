@@ -10,28 +10,34 @@ function importData() {
               let sum = 0;
               let i = 0
               puzzle_input.forEach(element => {
-                let aCurrentRucksack = [element.substring(0,element.length/2|0),element.substring(element.length/2|0)];
-                sum = sum + calcAlfabet(calc(aCurrentRucksack[0],aCurrentRucksack[1]));
-                console.log(sum + '  '+  calcAlfabet(calc(aCurrentRucksack[0],aCurrentRucksack[1])) + ' : '+  calc(aCurrentRucksack[0],aCurrentRucksack[1]) +  '  : ' + i);
-                i++;
+
+                a = [element.split(',')]; // split into value for 1 elf
+                b = [a[0][0].split('-'),a[0][1].split('-')]; // split into value for 1 elf
+                
+                if(checkContains(b[0][0], b[0][1], b[1][0], b[1][1],)) {
+                  i++;
+                }
+                else if(checkContains(b[1][0], b[1][1], b[0][0], b[0][1])) {
+                  i++;
+                }
               });
-              console.log(sum);
+              console.log(i);
               }; 
           };
     input.click();
   }
   
-  function calc(firstCompartments, secondCompartments) {
-        for (let i = 0; i<firstCompartments.length; i++){
-            if(secondCompartments.indexOf(firstCompartments[i]) != -1) {
-                return firstCompartments[i];
-            }
-        }
-  }
 
-  function calcAlfabet(sLetter){
-    let sAlfabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    return sAlfabet.indexOf(sLetter) + 1;
+  // check if second array contains inside first array
+  function checkContains(minValue1, maxValue1, minValue2, maxValue2) {
+    let result = false;
+    (Number(maxValue1) >= Number(maxValue2)) ? result = true : result = false;
+
+    if(result){
+      (Number(minValue1) <= Number(minValue2)) ? result = true : result = false;
+    }
+
+    return result;
   }
   
   
