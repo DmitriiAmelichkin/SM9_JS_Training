@@ -4,6 +4,8 @@ This repo is for storing task for sm9 javascript Trainings
 link for the tasks:
 https://adventofcode.com
 
+Please, create your own branch. It can be here, or use git checkout -B yourbranch.
+
 some useful git commands:
 
 git init
