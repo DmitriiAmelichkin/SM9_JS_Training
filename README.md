@@ -21,7 +21,7 @@ git pull
 git push
 
 
-
+// if some problems with auth happend try to use ssh keys
 
 git remote -v
 git remote set-url origin git@github.com:USERNAME/REPONAME.git
