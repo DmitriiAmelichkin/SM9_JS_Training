@@ -28,7 +28,7 @@ function importData() {
   }
   
 
-  // check if second array contains inside first array
+  // check if second array contains inside first
   function checkContains(minValue1, maxValue1, minValue2, maxValue2) {
     let result = false;
     (Number(maxValue1) >= Number(maxValue2)) ? result = true : result = false;
