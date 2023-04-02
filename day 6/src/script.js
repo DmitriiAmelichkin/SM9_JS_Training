@@ -14,7 +14,7 @@ function importData() {
                   aBuffArray.push(puzzle_input[j+ i]);
                 }
                 if(!check4letters(aBuffArray) ){
-                  console.log(j+4);
+                  console.log(j+4); // i = 3, +1 (cause answer starts from 1, cycle from 0)
                 }
                 else {
                   aBuffArray.length = 0;
