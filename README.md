@@ -32,6 +32,8 @@ https://git-scm.com/downloads
 
 `git clone git@github.com:DmitriiAmelichkin/SM9_JS_Training.git`
 
+`cd SM9_JS_Training`
+
  4. Then you need to create your own branch. 
  
  `git checkout -B yourbranch`.
@@ -44,7 +46,7 @@ https://git-scm.com/downloads
 
 `git pull`
 
-`git push`. (the first time you should use `git push --set-upstream origin testbranch`)
+`git push`. (the first time you should use `git push --set-upstream origin yourbranch`)
 
 
 6. if you have some problems with auth try to create a ssh keys
