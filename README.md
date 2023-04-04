@@ -44,7 +44,7 @@ https://git-scm.com/downloads
 
 `git pull`
 
-`git push`
+`git push`. (the first time you should use `git push --set-upstream origin testbranch`)
 
 
 6. if you have some problems with auth try to create a ssh keys
