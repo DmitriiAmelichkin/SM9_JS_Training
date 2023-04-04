@@ -16,7 +16,7 @@ https://adventofcode.com/2022/leaderboard/private
 
  Now Markus can see you progress.
 
-# **Step 2.1**
+# **Step 2**
 
 In this step you need to choose the way of working with this repo.
 
@@ -61,4 +61,14 @@ https://docs.github.com/ru/authentication/connecting-to-github-with-ssh/generati
 
 
 https://docs.github.com/ru/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account
+
+# **Step 3** 
+If You are not able install git due to Nucleos you can use Github interface to upload your work.
+
+1. Click on the button `main` and then to the `View all branches`
+2. Create a `new branch` with your name
+3. Select you branch and click button `Add File` => `Create New file`
+4. If you want to make a folder write the folder name + `/` + name of the file
+5. Insert the code and press`Commit new file` in the bottom of the page
+
 
