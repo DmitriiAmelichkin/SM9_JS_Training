@@ -11,44 +11,41 @@ const SCISSORS = 'C';
 const PLAYER_ROCK = 'X';
 const PLAYER_PAPER = 'Y';
 const PLAYER_SCISSORS = 'Z';
-const WIN_SCORE = 6;
-const DRAW_SCORE = 3;
 
-const Shapes = {
+function Shapes() {
 
     //Map of weaker shapes
-    weaker: new Map([
+    let weaker = new Map([
         [ROCK, SCISSORS],
         [PAPER, ROCK],
         [SCISSORS, PAPER]
-    ]),
+    ]);
 
     //Map of stronger shapes
-    stronger: new Map([
+    let stronger = new Map([
         [ROCK, PAPER],
         [PAPER, SCISSORS],
         [SCISSORS, ROCK]
-    ]),
+    ]);
 
     //Player language translator
-    playerToElvenTranslation: new Map([
+    let playerToElvenTranslation = new Map([
         [PLAYER_ROCK, ROCK],
         [PLAYER_PAPER, PAPER],
         [PLAYER_SCISSORS, SCISSORS]
-    ]),
+    ]);
 
-    //Get shape that weaker tham
-    getWeaker: function (shape) {
-        return this.weaker.get(shape);
-    },
+    //From XYZ to ABC
+    this.playerShapeTranslate = (shape) => playerToElvenTranslation.get(shape);
     
-    //Get shape that stronger tham
-    getStronger: function (shape) {
-        return this.stronger.get(shape);
-    },
+    //Get shape that weaker than
+    this.getWeaker = (shape) => weaker.get(shape);
+    
+    //Get shape that stronger than
+    this.getStronger = (shape) => stronger.get(shape);
 
     //Shapes comparation
-    compare: function (shape1, shape2) {
+    this.compare = function (shape1, shape2) {
 
         if (shape1 === shape2) {
             return 0;
@@ -56,39 +53,40 @@ const Shapes = {
 
         //Not draw
         return this.getWeaker(shape1) === shape2 ? 1 : -1;
-    },
-
-    //From XYZ to ABC
-    playerShapeTranslate(shape) {
-        return this.playerToElvenTranslation.get(shape);
     }
 }
 
-const Scores = {
+function Scores() {
+
+    const WIN_SCORE = 6;
+    const DRAW_SCORE = 3;
 
     //Scores for different turns
-    scoresForShape: new Map([
+    let scoresForShape = new Map([
         [ROCK, 1],
         [PAPER, 2],
         [SCISSORS, 3]
-    ]),
+    ]);
 
     //Player and opponent scores
-    scores: { opponent: 0, player: 0 },
+    let scores = { opponent: 0, player: 0 };
 
-    addScoresForShapes(opponent_shape, player_shape) {
-        this.scores.opponent += this.scoresForShape.get(opponent_shape);
-        this.scores.player += this.scoresForShape.get(player_shape);
+    this.getScoresOpponent = () => scores.opponent;
+    this.getScoresPlayer = () => scores.player;    
+
+    this.addScoresForShapes = (opponent_shape, player_shape) => {
+        scores.opponent += scoresForShape.get(opponent_shape);
+        scores.player += scoresForShape.get(player_shape);
     },
 
-    addScoresForTurn(opponentWins, playerWins) {
+    this.addScoresForTurn = (opponentWins, playerWins) => {
         if (!opponentWins && !playerWins) {
-            this.scores.opponent += DRAW_SCORE;
-            this.scores.player += DRAW_SCORE;
+            scores.opponent += DRAW_SCORE;
+            scores.player += DRAW_SCORE;
         } else if (opponentWins)
-            this.scores.opponent += WIN_SCORE;
+            scores.opponent += WIN_SCORE;
         else
-            this.scores.player += WIN_SCORE;
+            scores.player += WIN_SCORE;
     }
 }
 
@@ -103,10 +101,13 @@ function main() {
     let partTwoLogicIsAtive = true;
 
     //Read and split input data
-    let aTurns = util.readFile('Task2.txt').split('\r\n');
+    let aTurns = util.readInput('Task2.txt');
+
+    let scores = new Scores();
+    let shapes = new Shapes();
 
     for (let turn of aTurns) {
-        //Parse current string
+        //Parse current turn
         let aCurrentTurn = turn.split(' ');
 
         let opponent_shape = aCurrentTurn[0];
@@ -117,10 +118,10 @@ function main() {
             //Choose player shape
             switch (aCurrentTurn[1]) {
                 case PLAYER_WIN:
-                    player_shape = Shapes.getStronger(opponent_shape);
+                    player_shape = shapes.getStronger(opponent_shape);
                     break;
                 case PLAYER_LOOSE:
-                    player_shape = Shapes.getWeaker(opponent_shape);
+                    player_shape = shapes.getWeaker(opponent_shape);
                     break;
                 case PLAYER_DRAW:
                     player_shape = opponent_shape;
@@ -128,29 +129,29 @@ function main() {
             }
         } else {
             //Translate player shape from XYZ to ABC
-            player_shape = Shapes.playerShapeTranslate(aCurrentTurn[1]);
+            player_shape = shapes.playerShapeTranslate(aCurrentTurn[1]);
         }
 
         //Points for turn
-        Scores.addScoresForShapes(opponent_shape, player_shape);
+        scores.addScoresForShapes(opponent_shape, player_shape);
 
         //Who is winner
-        let comparation_result = Shapes.compare(opponent_shape, player_shape);
+        let comparation_result = shapes.compare(opponent_shape, player_shape);
 
         //Points for win
-        Scores.addScoresForTurn(comparation_result === 1, comparation_result === -1);
+        scores.addScoresForTurn(comparation_result === 1, comparation_result === -1);
 
     }
 
     //Show result
-    console.log("Opponent scores: " + Scores.scores.opponent);
-    console.log("Player scores: " + Scores.scores.player);
+    console.log("Opponent scores: " + scores.getScoresOpponent());
+    console.log("Player scores: " + scores.getScoresPlayer());
     console.log("----------------");
 
-    if (Scores.scores.opponent === Scores.scores.player)
+    if (scores.getScoresOpponent() === scores.getScoresPlayer())
         console.log("Result: Draw");
     else
-        console.log(Scores.scores.player > Scores.scores.opponent ? "Player wins" : "Opponent wins");
+        console.log(scores.getScoresPlayer() > scores.getScoresOpponent() ? "Player wins" : "Opponent wins");
 
 }
 

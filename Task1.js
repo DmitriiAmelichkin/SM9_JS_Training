@@ -4,40 +4,46 @@
 //Export library
 let util = require('./Util.js');
 
-//Read and split input data
-let aItems = util.readFile('Task1.txt').split('\r\n')
-
 //Top 3 elves collection
-let topElves = {
-    top: [0, 0, 0],
-    add: function(item) {
-        this.top[0] = item;
-        this.top.sort();
+function TopElves() {
+    let that = this;
+    let top = [0, 0, 0];
+
+    this.add = (item) => {
+        top[0] = item;
+        top.sort();
     },
-    getMin: function() {
-        return this.top[0];
-    },
-    getAll: function() {
-        return this.top;
-    },
-    getSum: function() {
-        return this.top[0] + this.top[1] + this.top[2];
-    }
+
+    this.getMin = () => top[0];
+
+    this.getAll = () => top;
+
+    this.getSum = () => top[0] + top[1] + top[2];
 }
 
-let current = 0;
+function main() {
 
-//Calculate
-for (let item of aItems) { 
-    if (item === '') {
-        if (current > topElves.getMin()) 
-            topElves.add(current);
-        current = 0;
-    } else {
-        current += Number(item);
+    //Read and split input data
+    let aItems = util.readInput('Task1.txt');
+
+    let currentItemSum = 0;
+
+    let topElves = new TopElves();
+
+    //Calculate
+    for (let item of aItems) {
+        if (item === '') {
+            if (currentItemSum > topElves.getMin())
+                topElves.add(currentItemSum);
+            currentItemSum = 0;
+        } else {
+            currentItemSum += Number(item);
+        }
     }
+
+    //Show result
+    console.log("Top carriers: " + topElves.getAll());
+    console.log("Total: " + topElves.getSum());
 }
 
-//Show result
-console.log("Top carriers: " + topElves.getAll());
-console.log("Total: " + topElves.getSum());
+main();
