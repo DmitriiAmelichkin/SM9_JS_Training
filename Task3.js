@@ -1,5 +1,6 @@
 //https://adventofcode.com/2022/day/3
-//Task 2. Aleksander Iagofarov
+//Task 3. Aleksander Iagofarov
+
 //Export library
 let util = require('./Util.js');
 
