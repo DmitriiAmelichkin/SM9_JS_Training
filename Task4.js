@@ -8,11 +8,6 @@ function isNested(range1, range2) {
     if (range1.begin <= range2.begin && range1.end >= range2.end ) return true;
 }
 
-function isOverlap(){
-    if (range1.begin <= range2.begin && range1.end >= range2.end ) return true;
-    if (range1.begin <= range2.begin && range1.end >= range2.end ) return true;
-}
-
 function main() {
     //Read and split input data
     let aAssignmentPairs = util.readInput('Task4.txt');
