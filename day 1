@@ -17,7 +17,7 @@ let sum_biggestThree = [];
 for (const group of groups) {
     const answers = group.split('\r\n').map(Number);
     //console.log(answers);
-    const elftotal = answers.reduce((acc,cur) => acc+=cur,0) // 0 initial value, acc = accumulated result adds the current (cur) value to a variable
+    const elftotal = answers.reduce((acc,cur) => acc+=cur,0) 
     sum_biggestThree.push(elftotal);
     part1 = Math.max(part1, elftotal);
     }
@@ -27,7 +27,7 @@ sum_biggestThree.sort(function(a,b){return b-a});
 
 let part2 = 0;
 for (let i=0;i<3;i++){
-    part2 += sum_biggestThree[i]; //+= adds a value to the variable, in this case also in the new array
+    part2 += sum_biggestThree[i]; 
     }
 
 console.log(part2);
