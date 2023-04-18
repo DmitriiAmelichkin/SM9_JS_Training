@@ -1,26 +1,33 @@
-// Advent of Code 2022 Day 1 Part 1
-// Markus Hammelmann
+// Advent of Code 2023 Day 1 Part 1 & 2
+// Nicole Herrmann
 // Node.js
-// Start 1.12.2022 6:00 End 6:05
 
 // Topic: Grouped Data, Sums of Arrays
-// Library Functions used: none
 
-// const TRAINING = true;
-var TRAINING = false;
-var fs = require('fs');
+const TRAINING = false;
+const fs = require('fs');
 
-var inputfilename;
+let inputfilename;
 (TRAINING) ? inputfilename = "./input_training.txt" : inputfilename = "./input.txt";
-var groups = readFileSync(inputfilename, "utf-8").split('\r\n\r\n' || '\n\r\n\r')
+let groups = fs.readFileSync(inputfilename, "utf-8").split('\r\n\r\n' || '\n\r\n\r')
 
-var part1 = -Infinity;
+let part1 = -Infinity;
+let sum_biggestThree = [];
+
 for (const group of groups) {
-var answers = group.split('\r\n').map(Number);
-console.log(answers);
-var elftotal = answers.reduce((acc,cur) => acc+=cur,0)
-// console.log(answerSet.size);
-part1 = Math.max(part1, elftotal);
-
-}
+    const answers = group.split('\r\n').map(Number);
+    //console.log(answers);
+    const elftotal = answers.reduce((acc,cur) => acc+=cur,0) // 0 initial value, acc = accumulated result adds the current (cur) value to a variable
+    sum_biggestThree.push(elftotal);
+    part1 = Math.max(part1, elftotal);
+    }
 console.log('Part 1 :>> ', part1);
+
+sum_biggestThree.sort(function(a,b){return b-a});
+
+let part2 = 0;
+for (let i=0;i<3;i++){
+    part2 += sum_biggestThree[i]; //+= adds a value to the variable, in this case also in the new array
+    }
+
+console.log(part2);
