@@ -6,13 +6,13 @@
 // input file
 const fs = require('fs');
 
-let inputfilename = "./inputday_2.txt";
+let inputfilename = "./day 2/inputday_2.txt";
 let game = fs.readFileSync(inputfilename, "utf-8"). split('\r\n' || '\n\r');
 console.log(game);
 
 // components and condition
-let myGame = [];
-let opponent = [];
+let myGame = 0;
+let opponent = 0;
 for(var i=0; i<game.length;i++) {
     if(game[i].startsWith("A X")){
         myGame += 4;
@@ -24,8 +24,8 @@ for(var i=0; i<game.length;i++) {
         opponent += 1;
     }
     if(game[i].startsWith("A Z")){
-        myGame += 9;
-        opponent += 1;
+        myGame += 3;
+        opponent += 7;
     }
     if(game[i].startsWith("B X")){
         myGame += 1;
@@ -89,4 +89,5 @@ console.log("points for myGame is: " +sum);
 //summary of the values for opponent
 var addOp = arrOpNum => arrOpNum.reduce((a,b) =>a+b);
 var sumOp = add(arrOpNum);
+//console.log(typeof arrOpNum);
 console.log("points for the opponent is: " +sumOp);
