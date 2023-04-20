@@ -5,6 +5,7 @@
 // Topic: Scissors, Stone, Paper Game
 // input file
 const fs = require('fs');
+
 let inputfilename = "./inputday_2.txt";
 let game = fs.readFileSync(inputfilename, "utf-8"). split('\r\n' || '\n\r');
 console.log(game);
@@ -59,14 +60,33 @@ for(var i=0; i<game.length;i++) {
 let arrGame = Object.values(myGame);
 const arrOfStr = arrGame;
 const arrOfNum = [];
+
 arrOfStr.forEach(str => {
     arrOfNum.push(parseInt(str));
 });
 console.log(arrOfNum);
+
+//console.log(typeof arrGame);
+
+//return the strings in opponent to numbers
+let arrOpponent = Object.values(opponent);
+const arrOpStr = arrOpponent;
+const arrOpNum = [];
+
+arrOpStr.forEach(str => {
+    arrOpNum.push(parseInt(str));
+});
+console.log(arrOpNum);
+
 //console.log(typeof arrGame);
 
 //summary of the values for myGame
 var add = arrOfNum => arrOfNum.reduce((a,b) =>a+b);
 var sum = add(arrOfNum);
 //console.log(typeof arrOfNum);
-console.log(sum);
+console.log("points for myGame is: " +sum);
+
+//summary of the values for opponent
+var addOp = arrOpNum => arrOpNum.reduce((a,b) =>a+b);
+var sumOp = add(arrOpNum);
+console.log("points for the opponent is: " +sumOp);
