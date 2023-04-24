@@ -24,7 +24,7 @@ function main() {
         }
     }
 
-
+    //Part 1
     function calculation(i, j, max) {
         if (map[i][j].size <= max) {
             map[i][j].invisibility++;
@@ -36,12 +36,12 @@ function main() {
     }
 
     function showVisMap() {
-        for(line of map) { 
+        for (line of map) {
             let str = '';
             for (tree of line) {
-                str+=tree.invisibility;
+                str += tree.invisibility;
             }
-            console.log(str) ;
+            console.log(str);
         };
     }
 
@@ -56,14 +56,14 @@ function main() {
             max_left = calculation(i, j, max_left);
             max_right = calculation(i, map_size - j - 1, max_right);
             max_top = calculation(j, i, max_top);
-            max_bottom = calculation( map_size - j - 1, i, max_bottom);
+            max_bottom = calculation(map_size - j - 1, i, max_bottom);
 
             //console.log("i=  "+i+" j="+j);
             //showVisMap();
             //console.log("------");
         }
 
-        
+
 
     }
 
@@ -75,10 +75,71 @@ function main() {
         }
     }
 
-    console.log("Amount of visible trees is: " + result );
+    console.log("Amount of visible trees is: " + result);
 
-    
-    //showVisMap();
 
+    //Part 2
+
+    function calculateVisibilityScore(posX, posY) {
+
+        let result_l = 0;
+        let result_r = 0;
+        let result_t = 0;
+        let result_b = 0;
+
+        let tree_size = map[posX][posY].size;
+
+        //Left
+        for (let i = posX - 1; i >= 0; i--) {
+            result_l++
+            if (map[i][posY].size >= tree_size)
+                break;
+        }
+
+        //Right
+        for (let i = posX + 1; i < map_size; i++) {
+            result_r++;
+            if (map[i][posY].size >= tree_size) {
+                break;
+            }
+        }
+
+        //Top
+        for (let i = posY - 1; i >= 0; i--) {
+            result_t++;
+            if (map[posX][i].size >= tree_size)
+                break;
+
+        }
+
+        //Bottom
+        for (let i = posY + 1; i < map_size; i++) {
+            result_b++;
+            if (map[posX][i].size >= tree_size)
+                break;
+        }
+
+        return result_l * result_r * result_t * result_b;
+    }
+
+
+
+
+    let maxScore = 0;
+
+    for (let i = 0; i < map_size; i++) {
+        for (let j = 0; j < map_size; j++) {
+
+            if (i > 2 && j > 2) {
+                console.log('Got it!');
+            }
+            let score = calculateVisibilityScore(i, j);
+            if (score > maxScore)
+                maxScore = score;
+        }
+    }
+
+    console.log("Max possible result: " + maxScore);
 }
+
 main();
