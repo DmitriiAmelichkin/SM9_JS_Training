@@ -1,0 +1,85 @@
+// Advent of Code 2023 Day 2 Part 2
+// Nicole Herrmann
+// Node.js
+
+// Topic: Scissors (C), Stone (A), Paper (B) Game
+// input file
+const fs = require('fs');
+
+let inputfilename = "./inputday2.txt";
+let game = fs.readFileSync(inputfilename, "utf-8"). split('\r\n' || '\n\r');
+//console.log(game);
+
+// components and condition
+// X = have to loose
+// Y = draw
+// Z = have to win
+
+let myGame = 0;
+let opponent = 0;
+for(var i=0; i<game.length;i++) {
+    if(game[i].startsWith("A X")){
+        myGame += 3; // Stone and Scissors, because Stone defeats Scissors, 3 points for choosing Scissors
+        opponent += 4;
+        continue
+    }
+    if(game[i].startsWith("A Y")){
+        myGame += 4; // Stone and Stone, round ends in a draw, 1 points for choosing Stone and 3 points for the draw
+        opponent += 1;
+    }
+    if(game[i].startsWith("A Z")){
+        myGame += 8; // Stone and Paper, because Paper defeats Stone, 2 points for choosing Paper and 6 for win
+        opponent += 7;
+    }
+    if(game[i].startsWith("B X")){
+        myGame += 1; // Paper and Stone, because Paper defeats Stone, 1 point for choosing Stone
+        opponent += 8;
+    }
+    if(game[i].startsWith("B Y")){
+        myGame += 5; // Paper and Paper, round ends in a draw, 2 points for choosing Paper and 3 points for the draw
+        opponent += 5;
+    }
+    if(game[i].startsWith("B Z")){
+        myGame += 9; // Paper and Scissors, because Scissors defeats Paper, 3 points for choosing Scissors and 6 for win
+        opponent += 2;
+    }
+    if(game[i].startsWith("C X")){
+        myGame += 2; // Scissors and Paper, because Scissors defeats Paper, 2 point for choosing Stone
+        opponent += 3;
+    }
+    if(game[i].startsWith("C Y")){
+        myGame += 6; // Scissors and Scissors, round ends in a draw, 3 points for choosing Paper and 3 points for the draw
+        opponent += 9;
+    }
+    if(game[i].startsWith("C Z")){
+        myGame += 7; // Scissors and Stone, because Stone defeats Scissors, 1 points for choosing Scissors and 6 for win
+        opponent += 6;
+    }
+}
+//console.log("myGame:" + myGame);
+//console.log(typeof myGame);
+
+//Looping over objects by converting to an array
+//return the strings in myGame to numbers
+let arrGame = Object.values(myGame);
+const arrOfStr = arrGame;
+const arrOfNum = [];
+
+arrOfStr.forEach(str => {
+    arrOfNum.push(parseInt(str));
+});
+//console.log(arrOfNum);
+
+//console.log(typeof arrGame);
+
+//return the strings in opponent to numbers
+let arrOpponent = Object.values(opponent);
+const arrOpStr = arrOpponent;
+const arrOpNum = [];
+
+arrOpStr.forEach(str => {
+    arrOpNum.push(parseInt(str));
+});
+//console.log(arrOpNum);
+console.log(myGame);
+console.log(opponent);
