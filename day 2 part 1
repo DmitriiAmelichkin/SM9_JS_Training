@@ -1,4 +1,4 @@
-// Advent of Code 2023 Day 2 Part 1 & 2
+// Advent of Code 2023 Day 2 Part 1 
 // Nicole Herrmann
 // Node.js
 
@@ -76,18 +76,8 @@ const arrOpNum = [];
 arrOpStr.forEach(str => {
     arrOpNum.push(parseInt(str));
 });
-console.log(arrOpNum);
+//console.log(arrOpNum);
+console.log(myGame);
+console.log(opponent);
 
-//console.log(typeof arrGame);
 
-//summary of the values for myGame
-var add = arrOfNum => arrOfNum.reduce((a,b) =>a+b);
-var sum = add(arrOfNum);
-//console.log(typeof arrOfNum);
-console.log("points for myGame is: " +sum);
-
-//summary of the values for opponent
-var addOp = arrOpNum => arrOpNum.reduce((a,b) =>a+b);
-var sumOp = add(arrOpNum);
-//console.log(typeof arrOpNum);
-console.log("points for the opponent is: " +sumOp);
